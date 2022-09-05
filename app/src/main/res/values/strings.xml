@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Vendas</string>
+
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="login">Login</string>
+    <string name="login_sufix_email">@gmail.com</string>
+    <string name="name" />
+    <string name="nome" />
+    <string name="age" />
+    <string name="masculino">Masculino</string>
+    <string name="female">Female</string>
+    <string name="Name">Name</string>
+    <string name="male">male</string>
+    <string name="mail">mail</string>
+    <string name="Age">Age</string>
+    <string name="Password">Password</string>
+    <string name="other">Other</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="name_account">Name Account</string>
+    <string name="account_balance">account balance</string>
+    <string name="name_user">Name User</string>
+    <string name="d_bito">Débito</string>
+    <string name="credito">Crédito</string>
+    <string name="back">Back</string>
 </resources>
