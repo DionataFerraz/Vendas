@@ -26,15 +26,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
+            android:text="@string/home_hello"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_18"
             app:layout_constraintBottom_toBottomOf="@+id/v_header"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/home_hello" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_account_balance"
@@ -92,6 +93,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_credit_card" />
 
         <Button
+            android:id="@+id/bt_nova_compra"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="40dp"
@@ -102,6 +104,33 @@
             app:layout_constraintEnd_toEndOf="@+id/tv_credit_card_place_holder"
             app:layout_constraintStart_toStartOf="@+id/tv_credit_card_place_holder"
             app:layout_constraintTop_toBottomOf="@+id/tv_credit_card_place_holder" />
+
+        <Button
+            android:id="@+id/bt_transactions"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/purple_700"
+            android:text="@string/transactions"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf="@+id/tv_account_place_holder"
+            app:layout_constraintStart_toStartOf="@+id/tv_account_place_holder"
+            app:layout_constraintTop_toBottomOf="@+id/tv_account_place_holder" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bt_account"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="320dp"
+            android:layout_marginTop="400dp"
+            android:contentDescription="@string/manage_account"
+            android:src="@drawable/ic_baseline_account_circle_24"
+            android:textSize="@dimen/text_size_14"
+            app:backgroundTint="@color/purple_700"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bt_nova_compra" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
