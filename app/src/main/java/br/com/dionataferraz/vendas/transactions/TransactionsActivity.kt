@@ -1,11 +1,14 @@
-package br.com.dionataferraz.vendas
+package br.com.dionataferraz.vendas.transactions
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import br.com.dionataferraz.vendas.HomeActivity
+import br.com.dionataferraz.vendas.TransactionAdapter
 import br.com.dionataferraz.vendas.databinding.ActivityTransactionsBinding
 
-class TransactionsActivity : AppCompatActivity(),TransactionAdapter.Listener {
+class TransactionsActivity : AppCompatActivity(), TransactionAdapter.Listener {
 
     private lateinit var binding: ActivityTransactionsBinding
     private val adapter: TransactionAdapter by lazy {
@@ -20,13 +23,13 @@ class TransactionsActivity : AppCompatActivity(),TransactionAdapter.Listener {
             adapter.updateItem(
                 "MUDOU AQUI", 6
             )
-/*            adapter.addNewList(
+            adapter.addNewList(
                 listOf(
                     "Item 11",
                     "Item 10",
                     "Item 9"
                 )
-            )*/
+            )
         }
 
         binding.rcList.adapter = adapter

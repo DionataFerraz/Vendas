@@ -1,9 +1,10 @@
-package br.com.dionataferraz.vendas
+package br.com.dionataferraz.vendas.login
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import br.com.dionataferraz.vendas.HomeActivity
 import br.com.dionataferraz.vendas.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -23,16 +24,6 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(null, null)
             val intent  = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-        }
-
-        viewModel.shouldShowError.observe(this) { shouldShow ->
-            if (shouldShow){
-                Toast.makeText(
-                    this,
-                    "Deu ruim",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
         }
     }
 }
