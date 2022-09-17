@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Vendas</string>
 
+    <string name="name">Nome</string>
+    <string name="age">Idade</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="login">Login</string>
+    <string name="gender">Gênero</string>
+    <string name="male">Masculino</string>
+    <string name="female">Feminino</string>
+    <string name="other">Outro</string>
+    <string name="create_profile">Criar perfil</string>
+    <string name="save">Salvar</string>
+    <string name="clear">Limpar</string>
 </resources>

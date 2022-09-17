@@ -1,9 +1,12 @@
-package br.com.dionataferraz.vendas
+package br.com.dionataferraz.vendas.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import br.com.dionataferraz.vendas.activities.ProfileActivity
 import br.com.dionataferraz.vendas.databinding.ActivityLoginBinding
+import br.com.dionataferraz.vendas.viewModels.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,16 +22,23 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btLogin.setOnClickListener {
-            viewModel.login(null, null)
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
 
         viewModel.shouldShowError.observe(this) { shouldShow ->
-            if (shouldShow){
+            if (shouldShow) {
                 Toast.makeText(
                     this,
                     "Deu ruim",
                     Toast.LENGTH_LONG
                 ).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Login realizado",
+                    Toast.LENGTH_LONG
+                )
             }
         }
     }
