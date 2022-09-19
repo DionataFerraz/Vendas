@@ -83,6 +83,7 @@
             android:layout_marginTop="210dp"
             android:text="@string/registrar"
             android:layout_marginStart="230dp"
+            android:clickable="true"
             android:textColor="?attr/colorPrimaryVariant"
             app:layout_constraintTop_toBottomOf="@+id/bt_login" />
 

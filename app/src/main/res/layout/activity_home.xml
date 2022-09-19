@@ -129,8 +129,8 @@
             android:textSize="@dimen/text_size_14"
             app:backgroundTint="@color/purple_700"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_nova_compra" />
-
+            app:layout_constraintTop_toBottomOf="@+id/bt_nova_compra"
+            app:tint="#FFFF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

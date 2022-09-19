@@ -9,14 +9,6 @@ import br.com.dionataferraz.vendas.databinding.ActivityAccountBinding
 
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
-data class Account(
-    val accountName: String,
-    val accountManager: String,
-    val accountBalance: Double,
-    val typeCredit: Boolean,
-    val typeDebit: Boolean
-)
-
 class AccountActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAccountBinding
@@ -28,7 +20,11 @@ class AccountActivity : AppCompatActivity() {
             setContentView(root)
         }
         loadAccountData()
-        binding.btSave.setOnClickListener { saveData() }
+        binding.btClear.setOnClickListener { clearData() }
+        binding.btSave.setOnClickListener {
+            saveData()
+            finish()
+        }
     }
 
     private fun saveData() {
@@ -47,8 +43,22 @@ class AccountActivity : AppCompatActivity() {
             putString("accountManager", accountManager)
             putString("accountBalance", accountBalance)
         }.apply()
-
         Toast.makeText(this, "Account settings saved successfully", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun clearData() {
+        val sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.apply {
+            putString("accountName", "")
+            putString("accountManager", "")
+            putString("accountBalance", "")
+            putBoolean("creditType", true)
+            putBoolean("debitType", false)
+        }.clear().apply()
+        loadAccountData()
+        Toast.makeText(this, "Account settings cleared successfully", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadAccountData() {
@@ -62,5 +72,7 @@ class AccountActivity : AppCompatActivity() {
         binding.etAccountName.text = accountNameSaved.toString().toEditable()
         binding.etAccountM.text = accountManagerSaved.toString().toEditable()
         binding.etAccountBalance.text = accountBalanceSaved.toString().toEditable()
+        binding.rdAccountTypeCredit.isChecked = creditTypeSaved
+        binding.rdAccountTypeDebit.isChecked = debitTypeSaved
     }
 }
