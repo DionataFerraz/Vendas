@@ -31,4 +31,11 @@
     <string name="go_back">Go back</string>
     <string name="conta">Conta</string>
     <string name="manage_account">Manage account</string>
+    <string name="leftarrow"><![CDATA[<]]></string>
+    <string name="transaction_type">Transaction type</string>
+    <string name="transaction_title">Transaction Title</string>
+    <string name="_14_57">14:57</string>
+    <string name="_246_50">246.50</string>
+    <string name="r_253_23">R$ 253.23</string>
+    <string name="transactionsTitle">Transactions</string>
 </resources>
