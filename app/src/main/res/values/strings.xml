@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Vendas</string>
-
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="login">Login</string>
@@ -38,4 +37,20 @@
     <string name="_246_50">246.50</string>
     <string name="r_253_23">R$ 253.23</string>
     <string name="transactionsTitle">Transactions</string>
+    <string name="configura_es_da_conta">Configurações da conta!</string>
+    <string name="configura_es_de_cadastro">Configurações de cadastro</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="configuracoesDaConta">Configurações da conta</string>
+    <string name="balance">Balance</string>
+    <string name="menu_principal">Menu Principal</string>
+    <string name="nova_transa_o">Nova transação</string>
+    <string name="sacar">Sacar</string>
+    <string name="depositar">Depositar</string>
+    <string name="valor_da_opera_o">Valor da operação</string>
+    <string name="voltar">Voltar</string>
+
+    <string-array name="operations">
+        <item>Sacar</item>
+        <item>Depositar</item>
+    </string-array>
 </resources>

@@ -6,6 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".transactions.TransactionsActivity">
 
         <TextView
@@ -30,13 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_transactions"
             app:layout_constraintBottom_toTopOf="@+id/rc_list"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline"
-            app:layout_constraintGuide_begin="100dp"
-            android:orientation="vertical"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_list"

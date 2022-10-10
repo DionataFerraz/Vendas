@@ -1,12 +1,13 @@
-package br.com.dionataferraz.vendas.transactions
+package br.com.dionataferraz.vendas.transactions.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.dionataferraz.vendas.domain.OperationTypeEnum
 import br.com.dionataferraz.vendas.R
+import br.com.dionataferraz.vendas.data.model.Transaction
 import br.com.dionataferraz.vendas.databinding.ItemListBinding
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 
 class TransactionAdapter(private val listener: Listener) :
     RecyclerView.Adapter<TransactionViewHolder>() {
@@ -15,7 +16,7 @@ class TransactionAdapter(private val listener: Listener) :
         fun onItemClick(text: String)
     }
 
-    private val listItem: MutableList<TransactionItem> = mutableListOf()
+    private val listItem: MutableList<Transaction> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
         val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,7 +32,7 @@ class TransactionAdapter(private val listener: Listener) :
         return listItem.size
     }
 
-    fun addList(list: List<TransactionItem>) {
+    fun addList(list: List<Transaction>) {
         listItem.addAll(list)
     }
 
@@ -44,22 +45,26 @@ class TransactionViewHolder(
 
     private val formatter = SimpleDateFormat("hh:mm")
 
-    fun bind(TransactionItem: TransactionItem) {
-        val value = TransactionItem.price.toString()
+    fun bind(TransactionItem: Transaction) {
+        val value = TransactionItem.operationValue.toString()
 
-        binding.tvTransactionTitle.text = TransactionItem.title
-        binding.tvTransactionTime.text = formatter.format(TransactionItem.time)
-        binding.tvTransactionValue.text = "R$ $value"
+        binding.tvTransactionTime.text = TransactionItem.date
 
-        when (TransactionItem.type) {
-            TransactionType.SERVICES_ON_DEMAND -> binding.ivTransaction.setImageResource(R.drawable.ic_baseline_video_library_24)
-            TransactionType.GAS_STATION -> binding.ivTransaction.setImageResource(R.drawable.ic_baseline_local_gas_station_24)
-            TransactionType.MARKET -> binding.ivTransaction.setImageResource(R.drawable.ic_baseline_shopping_cart_24)
-            TransactionType.BAR -> binding.ivTransaction.setImageResource(R.drawable.ic_baseline_local_bar_24)
+        if (TransactionItem.operationTypeEnum == OperationTypeEnum.DEPOSITAR) {
+            binding.tvTransactionTitle.text = "Deposit"
+            binding.tvTransactionValue.text = "R$ +$value"
+        } else {
+            binding.tvTransactionTitle.text = "Withdraw"
+            binding.tvTransactionValue.text = "R$ -$value"
+        }
+
+        when (TransactionItem.operationTypeEnum) {
+            OperationTypeEnum.SACAR -> binding.ivTransaction.setImageResource(R.drawable.ic_baseline_money_off_24)
+            OperationTypeEnum.DEPOSITAR -> binding.ivTransaction.setImageResource(R.drawable.ic_baseline_attach_money_24)
         }
 
         binding.root.setOnClickListener {
-            listener.onItemClick(TransactionItem.title)
+            listener.onItemClick(TransactionItem.operationTypeEnum.name)
         }
     }
 }

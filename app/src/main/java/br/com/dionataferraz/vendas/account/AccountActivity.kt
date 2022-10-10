@@ -1,78 +1,43 @@
 package br.com.dionataferraz.vendas.account
 
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import br.com.dionataferraz.vendas.account.view.AccountViewModel
+import br.com.dionataferraz.vendas.data.model.User
 import br.com.dionataferraz.vendas.databinding.ActivityAccountBinding
-
-fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
+import br.com.dionataferraz.vendas.transactions.getEditable
 
 class AccountActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAccountBinding
+    private lateinit var viewModel: AccountViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivityAccountBinding.inflate(layoutInflater).run {
-            binding = this
-            setContentView(root)
-        }
-        loadAccountData()
-        binding.btClear.setOnClickListener { clearData() }
+        binding = ActivityAccountBinding.inflate(layoutInflater)
+        viewModel = AccountViewModel()
+        val view = binding.root
+        setContentView(view)
+        setValues(viewModel.getUser())
+
         binding.btSave.setOnClickListener {
-            saveData()
-            finish()
+            viewModel.createUser(getBindingValues())
         }
     }
 
-    private fun saveData() {
-        val accountName = binding.etAccountName.text.toString()
-        val accountManager = binding.etAccountM.text.toString()
-        val accountBalance = binding.etAccountBalance.text.toString()
-        val creditType = binding.rdAccountTypeCredit.isChecked
-        val debitType = binding.rdAccountTypeDebit.isChecked
-
-        val sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.apply {
-            putString("accountName", accountName)
-            putBoolean("creditType", creditType)
-            putBoolean("debitType", debitType)
-            putString("accountManager", accountManager)
-            putString("accountBalance", accountBalance)
-        }.apply()
-        Toast.makeText(this, "Account settings saved successfully", Toast.LENGTH_SHORT).show()
+    private fun setValues(user: User) {
+        binding.etAccountName.text = getEditable(user)
+        binding.etAccountBalance.text = getEditable(user)
+        binding.etAccountM.text = getEditable(user)
     }
 
-    private fun clearData() {
-        val sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        editor.apply {
-            putString("accountName", "")
-            putString("accountManager", "")
-            putString("accountBalance", "")
-            putBoolean("creditType", true)
-            putBoolean("debitType", false)
-        }.clear().apply()
-        loadAccountData()
-        Toast.makeText(this, "Account settings cleared successfully", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun loadAccountData() {
-        val sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        val accountNameSaved = sharedPreferences.getString("accountName", null)
-        val accountManagerSaved = sharedPreferences.getString("accountManager", null)
-        val accountBalanceSaved = sharedPreferences.getString("accountBalance", null)
-        val creditTypeSaved = sharedPreferences.getBoolean("creditType", true)
-        val debitTypeSaved = sharedPreferences.getBoolean("debitType", false)
-
-        binding.etAccountName.text = accountNameSaved.toString().toEditable()
-        binding.etAccountM.text = accountManagerSaved.toString().toEditable()
-        binding.etAccountBalance.text = accountBalanceSaved.toString().toEditable()
-        binding.rdAccountTypeCredit.isChecked = creditTypeSaved
-        binding.rdAccountTypeDebit.isChecked = debitTypeSaved
+    private fun getBindingValues(): User {
+        return User(
+            name = binding.etAccountName.text.toString(),
+            accountBalance = binding.etAccountBalance.text.toString().toDouble(),
+            accountManager = binding.etAccountM.text.toString()
+        )
     }
 }
