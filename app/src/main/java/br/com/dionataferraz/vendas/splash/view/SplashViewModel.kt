@@ -1,17 +1,18 @@
-package br.com.dionataferraz.vendas.login
+package br.com.dionataferraz.vendas.splash.view
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.dionataferraz.vendas.model.GetUserModel
+import br.com.dionataferraz.vendas.data.usecase.UserCase
 import br.com.dionataferraz.vendas.login.domain.usecase.GetLoginUsecase
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class SplashViewModel : ViewModel() {
 
-    private val usecase by lazy {
-        GetLoginUsecase()
+    private val useCase: UserCase by lazy {
+        UserCase()
     }
 
     private val error: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -20,22 +21,19 @@ class LoginViewModel : ViewModel() {
     private val home: MutableLiveData<Boolean> = MutableLiveData(false)
     val shouldShowHome: LiveData<Boolean> = home
 
-    fun login(name: String, email: String?, password: String?) {
+    private val user: MutableLiveData<GetUserModel?> = MutableLiveData()
+    val getUser: LiveData<GetUserModel?> = user
+
+    fun getUser() {
         viewModelScope.launch {
-            if (email != null && password != null) {
-                val user = usecase.login(name = name, email = email, password = password)
+            val localUser: GetUserModel? = useCase.getUser()
 
-                if (user.get() != null) {
-                    home.value = true
-                } else {
-                    error.value = true
-                }
-
-                Log.e("login", user.get().toString())
-            } else {
+            if (localUser == null) {
                 error.value = true
+            } else {
+                home.value = true
+                user.value = localUser
             }
         }
     }
-
 }

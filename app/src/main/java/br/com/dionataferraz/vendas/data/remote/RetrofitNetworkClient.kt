@@ -1,4 +1,4 @@
-package br.com.dionataferraz.vendas.login.data.remote
+package br.com.dionataferraz.vendas.data.remote
 
 import br.com.dionataferraz.vendas.BuildConfig
 import com.squareup.moshi.Moshi

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import br.com.dionataferraz.vendas.HomeActivity
+import br.com.dionataferraz.vendas.home.HomeActivity
 import br.com.dionataferraz.vendas.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -21,10 +21,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btLogin.setOnClickListener {
-            viewModel.login(
+            /*viewModel.login(
                 binding.etEmail.text.toString(),
                 binding.etPassword.text.toString(),
-            )
+            )*/
         }
 
         viewModel.shouldShowHome.observe(this) { shouldOpen ->

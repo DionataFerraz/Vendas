@@ -1,21 +1,19 @@
-package br.com.dionataferraz.vendas.login.data.remote
+package br.com.dionataferraz.vendas.data.remote
 
-import android.util.Log
 import br.com.dionataferraz.vendas.login.data.response.UserResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LoginDataSource {
+class RegisterDataSource {
 
-    private val service = RetrofitNetworkClient
-        .createNetworkClient()
+    private val service = RetrofitNetworkClient.createNetworkClient()
         .create(LoginApi::class.java)
 
-    suspend fun login(email: String, password: String):
+    suspend fun login(name: String, email: String, password: String):
             Result<UserResponse, ErrorModel> {
         return withContext(Dispatchers.IO) {
             try {
-                val user = service.login(email, password)
+                val user = service.login(name, email, password)
                 Result.Success(user)
             } catch (exception: Exception) {
                 Result.Error(ErrorModel)
